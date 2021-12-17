@@ -1,11 +1,22 @@
-import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { Fragment } from "react";
+import { auth } from "../../config/Firebase";
 
 const Dashboard = () => {
-  // const user = useSelector((state) => state.auth.value);
+  const logoutHandler = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("User signed out");
+      })
+      .catch((error) => console.error(error.message));
+  };
 
-  // console.log("User from dashboard: ", user);
-
-  return <h1>Welcome to your private Dashboard</h1>;
+  return (
+    <Fragment>
+      <h1>Welcome to your private Dashboard</h1>
+      <button onClick={logoutHandler}>Log Out</button>
+    </Fragment>
+  );
 };
 
 export default Dashboard;
