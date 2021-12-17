@@ -3,9 +3,29 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { saveUser } from "./store/authSlice";
+import { useEffect } from "react";
 
 const App = () => {
+  const user = useSelector((state) => state.auth.value);
+  console.log("User from redux state: ", user);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(saveUser(user.refreshToken));
+      } else {
+        dispatch(saveUser(undefined));
+      }
+    });
+  }, [auth, dispatch]);
+
+  // Functions
   const signinHandler = (e) => {
     e.preventDefault();
 
