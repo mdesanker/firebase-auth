@@ -21,8 +21,8 @@ const App = () => {
         } 
       /> */}
         {/* Outlet implementation */}
-        <Route path="/dashboard" element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/" element={<Dashboard />} />
         </Route>
         <Route path="/signin" element={<Signin />} />
       </Routes>

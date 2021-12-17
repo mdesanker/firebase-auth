@@ -8,11 +8,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { saveUser } from "../../store/authSlice";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.value);
   console.log("User from redux state: ", user);
-  console.log("Auth from signin: ", auth.currentUser);
 
   const dispatch = useDispatch();
 
@@ -20,6 +21,7 @@ const Signin = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(saveUser(user.refreshToken));
+        navigate("/");
       } else {
         dispatch(saveUser(undefined));
       }
