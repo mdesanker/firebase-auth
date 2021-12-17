@@ -1,14 +1,37 @@
 import { auth } from "./config/Firebase";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 const App = () => {
-  const loginHandler = (e) => {
+  const signinHandler = (e) => {
     e.preventDefault();
 
     const email = document.querySelector("#email");
     const password = document.querySelector("#password");
 
     signInWithEmailAndPassword(auth, email.value, password.value)
+      .then((userCred) => {
+        const user = userCred.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+
+    email.value = "";
+    password.value = "";
+  };
+
+  const signupHandler = (e) => {
+    e.preventDefault();
+
+    const email = document.querySelector("#new-email");
+    const password = document.querySelector("#new-password");
+
+    createUserWithEmailAndPassword(auth, email.value, password.value)
       .then((userCred) => {
         const user = userCred.user;
         console.log(user);
@@ -29,7 +52,8 @@ const App = () => {
 
   return (
     <div>
-      <form onSubmit={loginHandler}>
+      <h2>Sign In</h2>
+      <form onSubmit={signinHandler}>
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" />
         <label htmlFor="password">Password:</label>
@@ -37,6 +61,16 @@ const App = () => {
         <button type="submit">Log In</button>
       </form>
       <button onClick={logoutHandler}>Log Out</button>
+
+      <hr />
+      <h2> Sign Up</h2>
+      <form onSubmit={signupHandler}>
+        <label htmlFor="new-email">Email:</label>
+        <input type="email" id="new-email" name="new-email" />
+        <label htmlFor="new-password">Password:</label>
+        <input type="password" id="new-password" name="new-password" />
+        <button type="submit">Log In</button>
+      </form>
     </div>
   );
 };
