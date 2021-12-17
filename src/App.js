@@ -2,25 +2,31 @@ import Signin from "./views/auth/SignIn";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./views/protected/ProtectedRoute";
 import Dashboard from "./views/protected/Dashboard";
+import { auth } from "./config/Firebase";
+import { Fragment } from "react";
+import Menu from "./views/menu/Menu";
 
 const App = () => {
   return (
-    <Routes>
-      {/* Children implementation */}
-      <Route
+    <Fragment>
+      <Menu />
+      <Routes>
+        {/* Children implementation */}
+        {/* <Route
         path="/"
         element={
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
-        }
-      />
-      {/* Outlet implementation */}
-      {/* <Route path="/" element={<ProtectedRoute />}>
-        <Route element={<Dashboard />} />
-      </Route> */}
-      <Route path="/signin" element={<Signin />} />
-    </Routes>
+        } 
+      /> */}
+        {/* Outlet implementation */}
+        <Route path="/dashboard" element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route path="/signin" element={<Signin />} />
+      </Routes>
+    </Fragment>
   );
 };
 

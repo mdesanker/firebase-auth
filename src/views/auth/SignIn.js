@@ -12,6 +12,7 @@ import { useEffect } from "react";
 const Signin = () => {
   const user = useSelector((state) => state.auth.value);
   console.log("User from redux state: ", user);
+  console.log("Auth from signin: ", auth.currentUser);
 
   const dispatch = useDispatch();
 
