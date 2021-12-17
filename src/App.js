@@ -1,6 +1,21 @@
+import { auth } from "./config/Firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 const App = () => {
   const loginHandler = (e) => {
     e.preventDefault();
+
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCred) => {
+        const user = userCred.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
   };
 
   return (
