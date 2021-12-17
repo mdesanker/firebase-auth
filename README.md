@@ -16,6 +16,6 @@ npm start
 ## Built with
 
 - React
-- styled-components
-- Firebase auth
 - Redux
+- React Router
+- Firebase auth

@@ -79,6 +79,8 @@ const Signin = () => {
   return (
     <div>
       <h2>Sign In</h2>
+      <p>Username: test@gmail.com</p>
+      <p>Password: test1234</p>
       <form onSubmit={signinHandler}>
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" />
