@@ -18,7 +18,9 @@ const App = () => {
         console.log(user);
       })
       .catch((error) => {
-        console.error(error.message);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error ocured: ", errorCode, errorMessage);
       });
 
     email.value = "";
@@ -37,7 +39,9 @@ const App = () => {
         console.log(user);
       })
       .catch((error) => {
-        console.error(error.message);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error ocured: ", errorCode, errorMessage);
       });
 
     email.value = "";
