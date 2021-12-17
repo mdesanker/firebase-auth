@@ -1,14 +1,14 @@
 import { auth } from "./config/Firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const App = () => {
   const loginHandler = (e) => {
     e.preventDefault();
 
-    const email = document.querySelector("#email").value;
-    const password = document.querySelector("#password").value;
+    const email = document.querySelector("#email");
+    const password = document.querySelector("#password");
 
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email.value, password.value)
       .then((userCred) => {
         const user = userCred.user;
         console.log(user);
@@ -16,6 +16,15 @@ const App = () => {
       .catch((error) => {
         console.error(error.message);
       });
+
+    email.value = "";
+    password.value = "";
+  };
+
+  const logoutHandler = () => {
+    signOut(auth)
+      .then(() => console.log("User signed out"))
+      .catch((error) => console.error(error.message));
   };
 
   return (
@@ -27,6 +36,7 @@ const App = () => {
         <input type="password" id="password" name="password" />
         <button type="submit">Log In</button>
       </form>
+      <button onClick={logoutHandler}>Log Out</button>
     </div>
   );
 };
