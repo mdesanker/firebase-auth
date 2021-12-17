@@ -4,11 +4,10 @@ const Menu = () => {
   return (
     <ul>
       <li>
-        <Link to="/signin">Sign In</Link>
-      </li>
-      <li>
         <Link to="/">Dashboard</Link>
       </li>
+      <li>Profile</li>
+      <li>Settings</li>
     </ul>
   );
 };
